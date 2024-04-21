@@ -3,6 +3,10 @@
   padding: 0px;
 }
 
+body {
+  font-family: Pacifico;
+}
+
 header,
 footer {
   padding: 3rem;
