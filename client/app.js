@@ -340,78 +340,80 @@ let result = [
   {
     era: "debut",
     description: "dkljfalfjna",
-    image: "./img/something.png",
+    image: "https://images.unsplash.com/photo-1532876075969-8c016daf9242?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     alt: "Image Alt",
     value: 0,
   },
   {
     era: "fearless",
     description: "dkljfalfjna",
-    image: "./img/something.png",
+    image: "https://images.unsplash.com/photo-1532876075969-8c016daf9242?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     alt: "Image Alt",
     value: 0,
   },
   {
     era: "speak now",
     description: "dkljfalfjna",
-    image: "./img/something.png",
+    image: "https://images.unsplash.com/photo-1532876075969-8c016daf9242?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     alt: "Image Alt",
     value: 0,
   },
   {
     era: "red",
     description: "dkljfalfjna",
-    image: "./img/something.png",
+    image: "https://images.unsplash.com/photo-1532876075969-8c016daf9242?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     alt: "Image Alt",
     value: 0,
   },
   {
     era: "1989",
     description: "dkljfalfjna",
-    image: "./img/something.png",
+    image: "https://images.unsplash.com/photo-1532876075969-8c016daf9242?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     alt: "Image Alt",
     value: 0,
   },
   {
     era: "reputation",
     description: "dkljfalfjna",
-    image: "./img/something.png",
+    image: "https://images.unsplash.com/photo-1532876075969-8c016daf9242?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     alt: "Image Alt",
     value: 0,
   },
   {
     era: "lover",
     description: "dkljfalfjna",
-    image: "./img/something.png",
+    image: "https://images.unsplash.com/photo-1532876075969-8c016daf9242?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     alt: "Image Alt",
     value: 0,
   },
   {
     era: "folklore",
     description: "dkljfalfjna",
-    image: "./img/something.png",
+    image: "https://images.unsplash.com/photo-1532876075969-8c016daf9242?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     alt: "Image Alt",
     value: 0,
   },
   {
     era: "evermore",
     description: "dkljfalfjna",
-    image: "./img/something.png",
+    image: "https://images.unsplash.com/photo-1532876075969-8c016daf9242?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     alt: "Image Alt",
     value: 0,
   },
   {
     era: "midnights",
     description: "dkljfalfjna",
-    image: "./img/something.png",
+    image: "https://images.unsplash.com/photo-1532876075969-8c016daf9242?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     alt: "Image Alt",
     value: 0,
   },
 ];
 
 // Element Selection
-const questionTag = document.querySelector("h2");
-const startQuiz = document.querySelector("button");
+const questionTag = document.querySelector('h2');
+const startQuiz = document.querySelector('button');
+const introText = document.getElementById('intro-text');
+const optionButtons = document.getElementsByClassName('image-button');
 
 // Button Wrapper
 const answersWrapper = document.getElementById("answers");
@@ -439,11 +441,15 @@ const answerFourQuestion = document.createElement("p");
 
 // Sets the loop index
 let i = 0;
+let chosenAnswer = null;
 
 // Element content creation / change function
 function displayQuestion(event) {
   // Append new buttons to the wrapper
   if (i == 0) {
+    introText.style.display = "none";
+    startQuiz.textContent = 'Next';
+
     answersWrapper.appendChild(answerOne);
     answerOne.setAttribute("class", "image-button");
     answerOne.appendChild(answerOneButton);
@@ -471,6 +477,20 @@ function displayQuestion(event) {
 
   // Updates the page content
   if (i <= 9) {
+    // For loop for the button on the page
+    for (let i = 0; i < optionButtons.length; i++) {
+      optionButtons[i].addEventListener('click', function(){
+        chosenAnswer = answers[i].tag;
+      });
+    }
+
+    // forEach over the result array and increment the value property
+    result.forEach(function(resultsObject) {
+      if (resultsObject.era === chosenAnswer) {
+        resultsObject.value++;
+      }
+    });
+
     // Updates header H2 to be current question
     questionTag.textContent = questions[i].question;
 
@@ -487,9 +507,33 @@ function displayQuestion(event) {
     answerOneImg.src = answers[0].image;
     answerOneImg.alt = answers[0].alt;
 
+    answerTwoImg.src = answers[1].image;
+    answerTwoImg.alt = answers[1].alt;
+
+    answerThreeImg.src = answers[2].image;
+    answerThreeImg.alt = answers[2].alt;
+
+    answerFourImg.src = answers[3].image;
+    answerFourImg.alt = answers[3].alt;
+
     i++;
   } else {
-    console.log("add result here");
+    // forEach over the result array and increment the value property
+    result.forEach(function(resultsObject) {
+      if (resultsObject.era === chosenAnswer) {
+        resultsObject.value++;
+      }
+    });
+
+    result.forEach(function(resultsObject) {
+      if (resultsObject.era === chosenAnswer) {
+        resultsObject.value++;
+      }
+      
+      // console.log(resultsObject.era + ' : ' + resultsObject.value);
+    });
+
+    console.log('add result here');
   }
 }
 

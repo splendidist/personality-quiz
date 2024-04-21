@@ -32,6 +32,7 @@ button.quiz-button {
   border: none;
   border-radius: 12px;
   background-color: lightpink;
+  margin-top: 1rem;
 }
 
 .image-button {
