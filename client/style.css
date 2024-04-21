@@ -21,9 +21,44 @@ main {
   align-items: center;
 }
 
-button {
+#answers {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+button.quiz-button {
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 12px;
   background-color: lightpink;
+}
+
+.image-button {
+  margin: 0 .5rem;
+  text-align: center;
+}
+
+.image-button button {
+  height: 250px;
+  width: 300px;
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 0px;
+  transition: all .25s ease;
+}
+
+.image-button button:focus {
+  border: 2px solid lightpink;
+}
+
+.image-button button:hover {
+  cursor: pointer;
+}
+
+.image-button button img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
 }
